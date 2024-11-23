@@ -1,0 +1,37 @@
+{% if ea.crud.currentAction == 'detail' %}
+    {% if is_blocked%}
+        <button class="btn btn-danger btn-xl" disabled="disabled">Block</button>
+        <a href="{{ ea_url().setRoute('user_unblock', { id: field.value }) }}" role="button" class="btn btn-success btn-xl" onclick="clickUnBlock();return false;" id="link_unblock">Unblock</a>
+    {% else %}
+        <a href="{{ ea_url().setRoute('user_block', { id: field.value }) }}" role="button" class="btn btn-danger btn-xl" onclick="clickBlock();return false;" id="link_block">Block</a>
+    {% endif %}
+
+    <style>
+        .btn-xl {
+            padding: 20px 20px;
+            font-size: 20px;
+            border-radius: 10px;
+            margin: 5px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function clickBlock() {
+            let ok = confirm('Block?');
+            if (ok) {
+                var selectBox = document.getElementById("block_reason");
+                var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+                window.location = document.getElementById("link_block") + '&block_reason=' + selectedValue;
+            }
+        }
+        function clickUnBlock() {
+            let ok = confirm('Unblock?');
+            if (ok) {
+                var selectBox = document.getElementById("block_reason");
+                var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+                //window.location = document.getElementById("link_unblock") + '&block_reason=' + selectedValue;
+                window.location = document.getElementById("link_unblock");
+            }
+        }
+    </script>
+{% endif %}

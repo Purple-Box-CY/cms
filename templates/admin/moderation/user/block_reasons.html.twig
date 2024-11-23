@@ -1,0 +1,21 @@
+{% if ea.crud.currentAction == 'detail' %}
+    <select id="block_reason" name="block_reason" data-ea-widget="ea-autocomplete"
+            data-ea-autocomplete-render-items-as-html="false" data-ea-i18n-no-results-found="No results found"
+            data-ea-i18n-no-more-results="No more results" data-ea-i18n-loading-more-results="Loading more results…"
+            class="form-select" >
+        {% for reason_alias, reason_name in block_reasons %}
+            <option value="{{ reason_alias }}" {% if reason_alias==field.value %}selected="selected"{% endif %}>
+                {{ reason_name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <br />
+    <h3>Help:</h3>
+    <ul>
+        <li><b>Inappropriate Content</b> - This category addresses videos that contain offensive, explicit, or harmful material. This includes content that is sexually explicit, graphically violent, promotes self-harm, or is otherwise deemed inappropriate for the communit</li>
+        <li><b>Intellectual Property Violations</b> - This involves uploading videos that infringe upon the copyrights or trademarks of others. It includes unauthorized use of copyrighted music, video clips, images, or any other protected material without proper licensing or permission.</li>
+        <li><b>Harassment, Bullying, Hate Speech, and Discrimination</b> - This category includes any behavior that involves intimidating, abusive, threatening, or discriminatory actions. It encompasses both harassment and bullying, as well as comments or content that promote hate or discrimination based on race, gender, religion, nationality, sexual orientation, age, or disability.</li>
+        <li><b>Spam and Scam</b> - This category combines spamming, disruptive behavior, impersonation, and fraud. It includes repeatedly posting unsolicited, irrelevant, or disruptive messages (spamming), as well as engaging in any deceptive practices, such as falsely representing oneself or others (scam).</li>
+    </ul>
+{% endif %}

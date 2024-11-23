@@ -1,0 +1,55 @@
+{% extends "mail/layout/template.html.twig" %}
+
+{% block title %}Your video blocked{% endblock %}
+
+{% block hidden %}
+    Your <a href="{{ content_link }}">video</a> blocked
+{% endblock %}
+
+{% block h1 %}
+    Video blocked
+{% endblock %}
+
+{% block h2 %}
+    Dear, {{ user_name }}
+{% endblock %}
+
+{% block body %}
+    <tr>
+        <td valign="top" align="left" style="text-align:left;padding:0px 20px;" class="padding1">
+            <p class="dynamic" style=" margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400; ">
+                Your <a href="{{ content_link }}">video</a> has been blocked for violating our community standards: {{ reason }}.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td height="8" style="font-size:12px; line-height:8px;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top" align="left" style="text-align:left;padding:0px 20px;" class="padding1">
+            <p class="dynamic" style=" margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400; ">
+                Review our <a href="{{ web_project_domain }}/terms-of-service">Terms of Service</a> for details..
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td height="8" style="font-size:12px; line-height:8px;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top" align="left" style="text-align:left;padding:0px 20px;" class="padding1">
+            <p class="dynamic" style=" margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400; ">
+                For disputes or discussions, contact us at <a href="mailto:{{ email_support }}">{{ email_support }}</a>. We're open to reviewing cases.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td height="8" style="font-size:12px; line-height:8px;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top" align="left" style="text-align:left;padding:0px 20px;" class="padding1">
+            <p class="dynamic" style=" margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400; ">
+                <img src="{{ content_image_url }}" style="width:100%; max-width:300px; height: auto;">
+            </p>
+        </td>
+    </tr>
+{% endblock %}

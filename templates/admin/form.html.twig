@@ -1,0 +1,17 @@
+{% block _Content_video_widget %}
+    <video id="video" class="video-js vjs-default-skin vjs-9-16" controls loop>
+        {% if '.m3u8' in value %}
+            <source src="{{ value }}">
+        {% else %}
+            <source src="{{ api_project_domain }}{{ value }}">
+        {% endif %}
+        <source src="{{ value }}">
+        Your browser does not support the video tag.
+    </video>
+    <script>
+        if ("{{ value  }}".endsWith('.m3u8')) {
+            document.querySelector('#video').childNodes.item(1).setAttribute('type', 'application/x-mpegURL');
+        }
+        videojs('video')
+    </script>
+{% endblock %}

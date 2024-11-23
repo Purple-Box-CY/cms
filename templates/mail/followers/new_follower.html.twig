@@ -1,0 +1,23 @@
+{% extends "mail/layout/template.html.twig" %}
+
+{% block hidden %}
+    You have a new follower
+{% endblock %}
+
+{% block h1 %}
+    You have a new follower
+{% endblock %}
+
+{% block h2 %}
+    Dear, {{ user_name }}
+{% endblock %}
+
+{% block body %}
+    <tr>
+        <td valign="top" align="left" style="text-align:left;padding:0px 20px;" class="padding1">
+            <p class="dynamic" style=" margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400; ">
+                User <a href="{{ follower_url }}">{{ follower_name }}</a> has started following you.
+            </p>
+        </td>
+    </tr>
+{% endblock %}

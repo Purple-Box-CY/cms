@@ -1,0 +1,20 @@
+{# templates/admin/custom_page.html.twig #}
+
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}
+    Send mystery box to user
+{% endblock %}
+
+{% block main %}
+    <form method="post" action="{{ urlAction }}">
+        <label for="user_id">Select user:</label>
+        <select name="user_id" id="user_id">
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button type="submit">Send mystery box</button>
+    </form>
+{% endblock %}

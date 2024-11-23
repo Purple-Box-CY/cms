@@ -1,0 +1,28 @@
+{% if ea.crud.currentAction == 'detail' %}
+    <a href="{{ ea_url().setRoute('user_audio_profile_approve', { id: field.value }) }}" role="button" class="btn btn-success btn-xl" onclick="return confirm('Approve?');" id="link_approve">Approve</a>
+    <a href="{{ ea_url().setRoute('user_audio_profile_decline', { id: field.value }) }}" role="button" class="btn btn-danger btn-xl" onclick="clickDecline();return false;" id="link_decline">Decline</a>
+
+    <style>
+        .btn-xl {
+            padding: 20px 20px;
+            font-size: 20px;
+            border-radius: 10px;
+            margin: 5px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function clickDecline() {
+            let ok = confirm('Decline?');
+            if (ok) {
+                var declineDescriptionValue = document.getElementById("decline_description").value;
+
+                var selectBox = document.getElementById("decline_reason");
+                var declineReasonValue = selectBox.options[selectBox.selectedIndex].value;
+
+                window.location = document.getElementById("link_decline") + '&decline_reason=' + declineReasonValue + '&decline_description=' + declineDescriptionValue;
+            }
+        }
+    </script>
+
+{% endif %}

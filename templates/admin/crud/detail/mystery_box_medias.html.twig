@@ -1,0 +1,64 @@
+{% if ea.crud.currentAction == 'detail' %}
+    <table class="table datagrid ">
+        <thead>
+        <tr>
+            <th>Preview</th>
+            <th>Uid (ID)</th>
+            <th>Type</th>
+            <th>Rank</th>
+            <th>Likes</th>
+            <th>Comments</th>
+            <th>Status</th>
+            <th>Created at</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        {% for item in field.value %}
+            {% set media_url = ea_url().setController('App\\Controller\\Admin\\MysteryBoxMediaCrudController').setAction('detail').setEntityId(item.id) %}
+            {% set html_id = 'ea-lightbox-' ~ item.uid ~ '-' ~ loop.index %}
+            {% set image = item.getPreviewUrlCrud %}
+            <tr>
+                <td>
+                    <a href="#" class="ea-lightbox-thumbnail" data-ea-lightbox-content-selector="#{{ html_id }}">
+                        <img src="{{ image }}" class="img-fluid">
+                    </a>
+
+                    <div id="{{ html_id }}" class="ea-lightbox">
+                        <img src="{{ image }}">
+                    </div>
+                </td>
+                <td>
+                    <a href="{{ media_url }}">{{ item.uid }}</a> ({{ item.id }})
+                </td>
+                <td>
+                    {{ item.type }}
+                </td>
+                <td>
+                    {{ item.rank }}
+                </td>
+                <td>
+                    {{ item.likesCount }}
+                </td>
+                <td>
+                    {{ item.commentsCount }}
+                </td>
+                <td>
+                    {% if (item.isDeleted or item.isBlocked) %}
+                        <span class="text-danger">{{ item.status }}</span>
+                    {% else %}
+                        {{ item.status }}
+                    {% endif %}
+                </td>
+                <td>
+                    {{ item.createdAtFormat }}
+                </td>
+                <td>
+                    <a class="dropdown-item action-reuploadAction" href="{{ ea_url().setRoute('mystery_box_media_re_preview', { id: item.id }) }}" data-action-name="reuploadAction"><i class="action-icon fa fa-refresh"></i> <span class="action-label">Re-preview</span></a>
+                    <a class="dropdown-item action-makeAsPreviewAction" href="{{ ea_url().setRoute('mystery_box_media_make_as_preview', { id: item.id }) }}" data-action-name="makeAsPreviewAction"><i class="action-icon fa fa-picture-o"></i> <span class="action-label">Make as preview</span></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    {{ field.formattedValue }}
+{% endif %}

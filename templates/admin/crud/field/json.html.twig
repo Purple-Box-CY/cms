@@ -1,0 +1,7 @@
+<pre id="{{ field.getProperty }}">
+    {{ field.value }}
+</pre>
+<script type="text/javascript">
+    var data = JSON.parse(document.getElementById("{{ field.getProperty }}").textContent)
+    document.getElementById("{{ field.getProperty }}").textContent = JSON.stringify(data, undefined, 2);
+</script>

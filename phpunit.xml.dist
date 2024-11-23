@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         colors="true"
+         bootstrap="tests/bootstrap.php"
+>
+    <php>
+        <ini name="display_errors" value="1" />
+        <ini name="error_reporting" value="-1" />
+        <server name="APP_ENV" value="test" force="true" />
+        <server name="SHELL_VERBOSITY" value="-1" />
+        <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
+        <server name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
+
+        <!-- ###+ aws/aws-sdk-php-symfony ### -->
+        <env name="AWS_KEY" value="not-a-real-key"/>
+        <env name="AWS_SECRET" value="@@not-a-real-secret"/>
+        <!-- ###- aws/aws-sdk-php-symfony ### -->
+
+        <!-- ###+ symfony-bundles/redis-bundle ### -->
+        <env name="REDIS_URL" value="tcp://127.0.0.1:6379?database=0"/>
+        <!-- ###- symfony-bundles/redis-bundle ### -->
+
+        <!-- ###+ symfony/resend-mailer ### -->
+        <!-- MAILER_DSN=resend+api://API_KEY@default -->
+        <!-- MAILER_DSN=resend+smtp://resend:API_KEY@default -->
+        <!-- ###- symfony/resend-mailer ### -->
+
+        <!-- ###+ symfony/slack-notifier ### -->
+        <!-- SLACK_DSN=slack://TOKEN@default?channel=CHANNEL -->
+        <!-- ###- symfony/slack-notifier ### -->
+
+        <!-- ###+ symfony/mail-pace-mailer ### -->
+        <!-- MAILER_DSN=mailpace+api://API_TOKEN@default -->
+        <!-- ###- symfony/mail-pace-mailer ### -->
+
+        <!-- ###+ symfony/mailchimp-mailer ### -->
+        <!-- MAILER_DSN=mandrill://KEY@default -->
+        <!-- MAILER_DSN=mandrill+smtp://USERNAME:PASSWORD@default -->
+        <!-- ###- symfony/mailchimp-mailer ### -->
+
+        <!-- ###+ google/apiclient ### -->
+        <env name="GOOGLE_API_KEY" value=""/>
+        <env name="GOOGLE_CLIENT_ID" value=""/>
+        <env name="GOOGLE_CLIENT_SECRET" value=""/>
+        <env name="GOOGLE_AUTH_CONFIG" value="%kernel.project_dir%/path/to/file.json"/>
+        <!-- ###- google/apiclient ### -->
+
+        <!-- ###+ sentry/sentry-symfony ### -->
+        <env name="SENTRY_DSN" value=""/>
+        <!-- ###- sentry/sentry-symfony ### -->
+    </php>
+
+    <testsuites>
+        <testsuite name="Project Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </coverage>
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+    </listeners>
+
+    <extensions>
+    </extensions>
+</phpunit>

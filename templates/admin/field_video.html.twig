@@ -1,0 +1,20 @@
+{% block field_video %}
+    {% if field.value is not empty %}
+        <video id="v{{ field.uniqueId }}" class="video-js vjs-default-skin vjs-9-16" controls loop>
+            {% if ('.m3u8' in field.value or 'cloudfront.net' in field.value ) %}
+                <source src="{{ field.value }}">
+            {% else %}
+                <source src="{{ api_project_domain }}{{ field.value }}">
+            {% endif %}
+            Your browser does not support the video tag.
+        </video>
+        <script>
+            if ("{{ field.value  }}".endsWith('.m3u8')) {
+                document.querySelector('#v{{ field.uniqueId }}').childNodes.item(1).setAttribute('type', 'application/x-mpegURL');
+            }
+            videojs('#v{{ field.uniqueId }}')
+        </script>
+    {% else %}
+        <span class="badge badge-secondary">No video available</span>
+    {% endif %}
+{% endblock %}

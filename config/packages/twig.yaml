@@ -1,0 +1,11 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+
+    globals:
+        api_project_domain: '%env(API_PROJECT_DOMAIN)%'
+        web_project_domain: '%env(WEB_PROJECT_DOMAIN)%'
+        email_support: '%env(EMAIL_SUPPORT)%'
+
+#when@test:
+#    twig:
+#        strict_variables: true

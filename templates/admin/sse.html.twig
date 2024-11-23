@@ -1,0 +1,15 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}
+    CMS Challenges SSE
+{% endblock %}
+
+{% block page_content %}
+    <script>
+        const source = new EventSource('/cms/admin/sse-events', {withCredentials: true});
+        source.addEventListener('news', function (event) {
+            console.log(event.data);
+            // source.close(); // disconnect stream
+        }, false);
+    </script>
+{% endblock %}

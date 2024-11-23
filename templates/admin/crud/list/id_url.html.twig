@@ -1,0 +1,11 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
+{# this template is used to display Doctrine entity primary keys #}
+
+    {% if field.customOptions.get('relatedUrl') is not null %}
+        {% set first = entity.actions|first %}
+        <a href="{{ first.linkUrl }}">{{ field.formattedValue }}</a>
+    {% else %}
+        {{ field.formattedValue }}
+    {% endif %}

@@ -1,0 +1,13 @@
+{% if ea.crud.currentAction == 'detail' %}
+    <select id="block_reason" name="block_reason" data-ea-widget="ea-autocomplete"
+            data-ea-autocomplete-render-items-as-html="false" data-ea-i18n-no-results-found="No results found"
+            data-ea-i18n-no-more-results="No more results" data-ea-i18n-loading-more-results="Loading more results…"
+            class="form-select" >
+        {% for reason_alias, reason_name in block_reasons %}
+            <option value="{{ reason_alias }}" {% if reason_alias==field.value %}selected="selected"{% endif %}>
+                {{ reason_name }}
+            </option>
+        {% endfor %}
+    </select>
+
+{% endif %}

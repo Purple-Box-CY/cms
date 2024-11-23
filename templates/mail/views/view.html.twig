@@ -1,0 +1,33 @@
+{% extends "mail/layout/template.html.twig" %}
+
+{% block hidden %}
+    Your content and profile have been viewed
+{% endblock %}
+
+{% block h1 %}
+    Your content and profile have been viewed
+{% endblock %}
+
+{% block h2 %}
+    Dear, {{ user_name }}
+{% endblock %}
+
+{% block body %}
+    <tr>
+        <td valign="top" align="left" style="text-align:left;padding:0px 20px;" class="padding1">
+            <p class="dynamic" style="margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400;">
+                Your content and profile have been viewed {{ views_count }} times:
+            </p>
+            {% for view in view_details %}
+                <p></p>
+                <p style="margin: 0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400;">{{ view|raw }}</p>
+                <p></p>
+            {% endfor %}
+            {% if remaining_count > 0 %}
+                <p class="dynamic" style="margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400;">
+                    And {{ remaining_count }} more people
+                </p>
+            {% endif %}
+        </td>
+    </tr>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "mail/layout/template.html.twig" %}
+
+{% block hidden %}
+    User purchased paid votes
+{% endblock %}
+
+{% block h1 %}
+    User purchased paid votes
+{% endblock %}
+
+{% block h2 %}
+    Dear, {{ user_name }}
+{% endblock %}
+
+{% block body %}
+    <tr>
+        <td valign="top" align="left" style="text-align:left;padding:0px 20px;" class="padding1">
+            <p class="dynamic" style=" margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400; ">
+                User <a href="{{ buyer_url }}">{{ buyer_name }}</a> has purchased {{ votes_count }} votes. Unfortunately, you currently lack a {{ mystery_box_type }} type Mystery Box for them. Please create a {{ mystery_box_type }} type Mystery Box, and we'll send it to the user right away.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td height="8" style="font-size:12px; line-height:8px;">&nbsp;</td>
+    </tr>
+{% endblock %}

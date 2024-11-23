@@ -1,0 +1,23 @@
+{% extends "mail/layout/template.html.twig" %}
+
+{% block hidden %}
+    Your Mystery box
+{% endblock %}
+
+{% block h1 %}
+    Your Mystery box
+{% endblock %}
+
+{% block h2 %}
+    Dear, {{ user_name }}
+{% endblock %}
+
+{% block body %}
+    <tr>
+        <td valign="top" align="left" style="text-align:left;padding:0px 20px;" class="padding1">
+            <p class="dynamic" style=" margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400; ">
+                Congratulations on purchasing votes for {{ creator_name }}! Unfortunately, at this time, the author does not have a Mystery box available for you. We will promptly send one to you as soon as it becomes available.
+            </p>
+        </td>
+    </tr>
+{% endblock %}

@@ -1,0 +1,7 @@
+{# templates/admin/business_stats/index.html.twig #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title 'Stripe info' %}
+{% block main %}
+    <pre>{{ paymentInfo.jsonData }} </pre>
+{% endblock %}

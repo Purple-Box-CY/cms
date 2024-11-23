@@ -1,0 +1,53 @@
+{% if ea.crud.currentAction == 'detail' %}
+    <table class="table datagrid ">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Uid</th>
+            <th>MysteryBox</th>
+            <th>Creator</th>
+            <th>Paid at</th>
+        </tr>
+        </thead>
+        {% for item in field.value %}
+            {% set mysteryBox = item.mysteryBox %}
+            {% set user_mystery_box_url = ea_url().setController('App\\Controller\\Admin\\UserMysteryBoxCrudController').setAction('detail').setEntityId(item.id) %}
+            {% set mystery_box_url = ea_url().setController('App\\Controller\\Admin\\MysteryBoxCrudController').setAction('detail').setEntityId(mysteryBox.id) %}
+            {% set html_id = 'ea-lightbox-' ~ item.uid ~ '-' ~ loop.index %}
+            {% set image = item.getPreview %}
+            <tr>
+                <td>
+                    <a href="#" class="ea-lightbox-thumbnail" data-ea-lightbox-content-selector="#{{ html_id }}">
+                        {% if 'http' in image %}
+                            <img src="{{ image }}" class="img-fluid">
+                        {% else %}
+                            <img src="{{ api_project_domain }}{{ image }}" class="img-fluid">
+                        {% endif %}
+                    </a>
+
+                    <div id="{{ html_id }}" class="ea-lightbox">
+                        {% if 'http' in image %}
+                            <img src="{{ image }}">
+                        {% else %}
+                            <img src="{{ api_project_domain }}{{ image }}">
+                        {% endif %}
+                    </div>
+                </td>
+                <td>
+                    <a href="{{ user_mystery_box_url }}">{{ item.uid }}</a>
+                </td>
+                <td>
+                    <a href="{{ mystery_box_url }}">{{ mysteryBox }}</a>
+                </td>
+                <td>
+                    {{ item.creator }}
+                </td>
+                <td>
+                    {{ item.paidAtFormat }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    {{ field.formattedValue }}
+{% endif %}

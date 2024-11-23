@@ -1,0 +1,23 @@
+{% extends "mail/layout/template.html.twig" %}
+
+{% block hidden %}
+    Your <a href="{{ web_project_domain }}">avatar</a> has been declined
+{% endblock %}
+
+{% block h1 %}
+    Avatar has been declined
+{% endblock %}
+
+{% block h2 %}
+    Dear, {{ user_name }}
+{% endblock %}
+
+{% block body %}
+    <tr>
+        <td valign="top" align="left" style="text-align:left;padding:0px 20px;" class="padding1">
+            <p class="dynamic" style=" margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400; ">
+                Your <a href="{{ web_project_domain }}">avatar</a> has been declined due to: {{ decline_reason }}{% if decline_description %} ({{ decline_description }}){% endif %}.
+            </p>
+        </td>
+    </tr>
+{% endblock %}

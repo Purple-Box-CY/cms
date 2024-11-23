@@ -1,0 +1,16 @@
+
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
+
+{% block socials_field %}
+    <ul>
+        <li><b>Instagram:</b> {{ field.value.instagram }}</li>
+        <li><b>Facebook:</b> {{ field.value.facebook }}</li>
+        <li><b>Tiktok:</b> {{ field.value.tiktok }}</li>
+        <li><b>Youtube:</b> {{ field.value.youtube }}</li>
+        <li><b>Twitter:</b> {{ field.value.twitter }}</li>
+        <li><b>Twitch:</b> {{ field.value.twitch }}</li>
+        <li><b>Reddit:</b> {{ field.value.reddit }}</li>
+    </ul>
+{% endblock %}

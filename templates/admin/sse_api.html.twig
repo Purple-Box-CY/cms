@@ -1,0 +1,23 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}
+    CMS Challenges SSE from API
+{% endblock %}
+
+{% block page_content %}
+    <script>
+        const source = new EventSource('{{ api_project_domain }}/api/events', {withCredentials: false});
+        source.addEventListener('connected', function (event) {
+            console.log(event.data);
+            // source.close(); // disconnect stream
+        }, false);
+        source.addEventListener('config', function (event) {
+            console.log(event.data);
+            // source.close(); // disconnect stream
+        }, false);
+        source.addEventListener('notification', function (event) {
+            console.log(event.data);
+            // source.close(); // disconnect stream
+        }, false);
+    </script>
+{% endblock %}

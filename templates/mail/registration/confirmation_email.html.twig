@@ -1,0 +1,91 @@
+{% extends "mail/layout/template.html.twig" %}
+
+{% block hidden %}
+    Welcome to service
+{% endblock %}
+
+{% block h1 %}
+    Thank you for registering
+{% endblock %}
+
+{% block h2 %}
+    Dear, User!
+{#     Welcome, {{ name }}! #}
+{% endblock %}
+
+{% block body %}
+    <tr>
+        <td valign="top" align="left" style="text-align:left;padding:0px 20px;" class="padding1">
+            <p class="dynamic" style=" margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400; ">
+                Thank you for signing up for an account.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td height="8" style="font-size:12px; line-height:8px;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top" align="left" style="text-align:left;padding:0px 20px;" class="padding1">
+            <p class="dynamic" style=" margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400; ">
+                Please confirm your email address by clicking the button below:
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td height="8" style="font-size:12px; line-height:8px;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top" align="left" style="text-align:left;padding:0px 20px;" class="padding1">
+            <p class="dynamic" style=" margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#FFFFFF; font-weight: 400; ">
+                    <!--[if mso]>
+                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ signedUrl|raw }}" style="height:60px;v-text-anchor:middle;width:190px;" arcsize="5%" strokecolor="#0a66c2" fillcolor="#0a66c2">
+                        <w:anchorlock/>
+                        <center style="color:#FFFFFF;font-family:Arial,sans-serif;font-size:16px;font-weight: 700;">
+                            Confirm email
+                        </center>
+                    </v:roundrect>
+                    <![endif]-->
+            </p>
+            {#
+            <p class="dynamic" style=" margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400; ">
+                <a
+                        href="{{ signedUrl|raw }}"
+                        target="_blank"
+                        name="link_button"
+                >Confirm email</a>
+            </p>
+            #}
+
+                    <a
+                            class="dynamicbutton"
+                            href="{{ signedUrl|raw }}"
+                            style="background-color:#0a66c2!important;border:1px solid #0a66c2!important;border-radius:40px;color:#FFFFFF!important;display:block;font-family:Arial,sans-serif;font-size:16px;line-height:60px;text-align:center;text-decoration:none;width:200px;-webkit-text-size-adjust:none;mso-hide:all;"
+                            {#
+                            style="background-color:#F755AC;border:1px solid #F755AC;border-radius:40px;color:#000000!important;display:block;font-family:Arial,sans-serif;font-size:16px;line-height:60px;text-align:center;text-decoration:none;width:200px;-webkit-text-size-adjust:none;mso-hide:all;"
+                            #}
+                            target="_blank"
+                            name="link_button"
+                    >
+                        <h3 class="dynamic" style="font-family:Arial,sans-serif;font-size:16px; color:#FFFFFF!important; font-weight: 700; line-height:100%; margin: 21px 0 22px;">
+                        {#
+                        <h3 class="dynamic" style="font-family:Arial,sans-serif;font-size:16px; color:#000000!important; font-weight: 700; line-height:100%; margin: 21px 0 22px;">
+                        #}
+                            Confirm email
+                        </h3>
+                    </a>
+        </td>
+    </tr>
+    <tr>
+        <td height="8" style="font-size:12px; line-height:8px;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top" align="left" style="text-align:left;padding:0px 20px;" class="padding1">
+            <p class="dynamic" style=" margin:0px; font-family:Arial,sans-serif; font-size:16px; line-height:24px; color:#000000; font-weight: 400; ">
+                The link is valid for {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+            </p>
+        </td>
+    </tr>
+{% endblock %}
+
+{% block bottom_button %}
+{% endblock %}

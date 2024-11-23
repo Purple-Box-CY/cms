@@ -1,0 +1,33 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}
+    CMS Challenges
+{% endblock %}
+
+{% block main %}
+    <ul>
+        {% for title, link in links %}
+            <li>
+                <a href="{{ link }}">{{ title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <b>Moderation:</b>
+    <ul>
+        {% for title, link in moderation_links %}
+            <li>
+                <a href="{{ link }}">{{ title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <b>Tech:</b>
+    <ul>
+        {% for title, link in tech_links %}
+            <li>
+                <a href="{{ link }}">{{ title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% if ea.crud.currentAction == 'detail' %}
+    <table class="table datagrid ">
+        <thead>
+        <tr>
+            <th>Avatar</th>
+            <th>Profile</th>
+            <th>Uid (ID)</th>
+            <th>Username</th>
+            <th>Full name</th>
+        </tr>
+        </thead>
+        {% for item in field.value %}
+            {% set user_url = ea_url().setController('App\\Controller\\Admin\\UserCrudController').setAction('detail').setEntityId(item.id) %}
+            {% set html_id = 'ea-lightbox-' ~ item.uid ~ '-' ~ loop.index %}
+            <tr>
+                <td>
+                    <a href="#" class="ea-lightbox-thumbnail" data-ea-lightbox-content-selector="#{{ html_id }}">
+                        <img src="{{ item.getAvatarUrl }}" class="img-fluid">
+                    </a>
+                    <div id="{{ html_id }}" class="ea-lightbox">
+                        <img src="{{ item.getAvatarUrl }}">
+                    </div>
+                </td>
+                <td>
+                    <a href="#" class="ea-lightbox-thumbnail" data-ea-lightbox-content-selector="#{{ html_id }}_profile">
+                        <img src="{{ item.getImageProfileCropUrl }}" class="img-fluid">
+                    </a>
+                    <div id="{{ html_id }}_profile" class="ea-lightbox">
+                        <img src="{{ item.getImageProfileCropUrl }}">
+                    </div>
+                </td>
+                <td>
+                    <a href="{{ user_url }}">{{ item.uid }}</a> ({{ item.id }})
+                </td>
+                <td>
+                    {{ item.username }}
+                </td>
+                <td>
+                    {{ item.getFullName }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    {{ field.formattedValue }}
+{% endif %}

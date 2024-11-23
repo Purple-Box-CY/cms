@@ -1,0 +1,57 @@
+{% if ea.crud.currentAction == 'detail' %}
+    <table class="table datagrid ">
+        <thead>
+        <tr>
+            <th>UID</th>
+            <th>Created At</th>
+            <th>Payment At</th>
+            <th>Buyer</th>
+            <th>Author</th>
+            <th>Payment method</th>
+            <th>Status</th>
+            <th>Purchase type</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Currency</th>
+        </tr>
+        </thead>
+        {% for item in payments %}
+            {% set payment_url = ea_url().setController('App\\Controller\\Admin\\PaymentCrudController').setAction('detail').setEntityId(item.id) %}
+            <tr>
+                <td>
+                    <a href="{{ payment_url }}">{{ item.getUid }}</a>
+                </td>
+                <td>
+                    {{ item.getCreatedAtFormat }}
+                </td>
+                <td>
+                    {{ item.getPaymentDateFormat }}
+                </td>
+                <td>
+                    {{ item.user }}
+                </td>
+                <td>
+                    {{ item.author }}
+                </td>
+                <td>
+                    {{ item.paymentMethod }}
+                </td>
+                <td>
+                    {{ item.status }}
+                </td>
+                <td>
+                    {{ item.purchaseType }}
+                </td>
+                <td>
+                    {{ item.type }}
+                </td>
+                <td>
+                    {{ item.amount }}
+                </td>
+                <td>
+                    {{ item.currency }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
