@@ -14,20 +14,17 @@ class UserDecline
 {
     public const REASON_DEFAULT = 'Verification conditions not met';
     public const REASON_NULL = '';
-    public const REASON_CHALLENGES_SERVICE_LINK_NOT_PROVIDED = 'challenges_link_not_provided';
     public const REASON_PRIVATE_SOCIAL_NETWORK_ACCOUNT = 'private_social_network_account';
     public const REASON_OTHER = 'other';
 
     public const REASONS = [
         self::REASON_NULL,
-        self::REASON_CHALLENGES_SERVICE_LINK_NOT_PROVIDED,
         self::REASON_PRIVATE_SOCIAL_NETWORK_ACCOUNT,
         self::REASON_OTHER,
     ];
 
     public const REASONS_NAMES = [
         self::REASON_NULL => '',
-        self::REASON_CHALLENGES_SERVICE_LINK_NOT_PROVIDED => 'Challenges service link is not provided',
         self::REASON_PRIVATE_SOCIAL_NETWORK_ACCOUNT => 'Private social network account',
         self::REASON_OTHER => 'Other',
     ];

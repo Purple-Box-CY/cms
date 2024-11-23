@@ -219,12 +219,6 @@ class MailService
 
         $context = $mail->getContext();
         $userId = $context['user_id'] ?? null;
-        switch ($mail->getType()) {
-            case MailType::MAIL_CREATOR_ABOUT_BOUGHT_VOTES_WITH_MYSTERY_BOX:
-            case MailType::MAIL_CREATOR_ABOUT_BOUGHT_VOTES_WITHOUT_MYSTERY_BOX:
-                $userId = $context['creator_id'] ?? null;
-                break;
-        }
 
         if (!$userId) {
             return null;
@@ -361,36 +355,6 @@ class MailService
         );
     }
 
-    public function sendMailUserImageProfileApproved(
-        User $user,
-    ): ?Mail {
-        $context = [
-            'user_name' => $user->getFullName(),
-        ];
-
-        return $this->createAndAddToQueue(
-            email: $user->getEmail(),
-            type: MailType::USER_IMAGE_PROFILE_APPROVED,
-            context: $context,
-        );
-    }
-
-    public function sendMailUserImageProfileDeclined(
-        User $user,
-    ): ?Mail {
-        $context = [
-            'user_name'           => $user->getFullName(),
-            'decline_reason'      => $user->getImageProfileDeclineReasonName(),
-            'decline_description' => $user->getImageProfileDeclineDescription(),
-        ];
-
-        return $this->createAndAddToQueue(
-            email: $user->getEmail(),
-            type: MailType::USER_IMAGE_PROFILE_DECLINED,
-            context: $context,
-        );
-    }
-
     public function sendMailUserAudioProfileApproved(
         User $user,
     ): ?Mail {
@@ -401,22 +365,6 @@ class MailService
         return $this->createAndAddToQueue(
             email: $user->getEmail(),
             type: MailType::USER_AUDIO_PROFILE_APPROVED,
-            context: $context,
-        );
-    }
-
-    public function sendMailUserAudioProfileDeclined(
-        User $user,
-    ): ?Mail {
-        $context = [
-            'user_name'           => $user->getFullName(),
-            'decline_reason'      => $user->getAudioProfileDeclineReasonName(),
-            'decline_description' => $user->getAudioProfileDeclineDescription(),
-        ];
-
-        return $this->createAndAddToQueue(
-            email: $user->getEmail(),
-            type: MailType::USER_AUDIO_PROFILE_DECLINED,
             context: $context,
         );
     }

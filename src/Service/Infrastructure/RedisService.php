@@ -3,8 +3,6 @@
 namespace App\Service\Infrastructure;
 
 use App\Entity\Article;
-use App\Entity\Challenge;
-use App\Entity\Content;
 use App\Entity\User;
 use App\Service\Exception\RedisQueueNotFoundException;
 use App\Service\Utility\MomentHelper;
@@ -285,14 +283,6 @@ class RedisService
         $this->clear($redisKeys);
     }
 
-
-    public function invalidateCacheUserMysteryBoxContents(User $user): void
-    {
-        $this->clear([
-            sprintf(RedisKeys::KEY_MYSTERY_BOXES_USER_CONTENTS_COUNT, $user->getUid()),
-            sprintf(RedisKeys::KEY_MYSTERY_BOXES_USER_INFO, $user->getUid()),
-        ]);
-    }
 
     public function invalidateCacheArticle(Article $article): void
     {

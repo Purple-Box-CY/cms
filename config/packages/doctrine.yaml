@@ -1,7 +1,6 @@
 doctrine:
     dbal:
         #        url: '%env(resolve:DATABASE_URL)%'
-        #url: 'postgresql://challengesuser:challengespass@127.0.0.1:5432/challenges?serverVersion=16&charset=utf8'
         #url: 'postgresql://%env(resolve:POSTGRES_USER)%:%env(resolve:POSTGRES_PASSWORD)%@%env(resolve:POSTGRES_HOST)%:%env(resolve:POSTGRES_PORT)%/%env(resolve:POSTGRES_DB)%?serverVersion=15&charset=utf8'
         driver: pdo_pgsql
         dbname: '%env(POSTGRES_DB)%'
