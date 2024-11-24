@@ -492,4 +492,9 @@ class Marker
 
         return $this;
     }
+
+    public function getCoordinates(): string
+    {
+        return sprintf('%s, %s', $this->latitude, $this->longitude);
+    }
 }

@@ -64,6 +64,12 @@ class MarkerCrudController extends AbstractCrudController
             ->hideOnIndex()
         ;
 
+        $coordinates = TextField::new('getCoordinates')
+            ->setLabel('Coordinates')
+            ->hideOnForm()
+            ->hideOnDetail()
+        ;
+
         $status = ChoiceField::new('status')
             ->renderAsBadges(
                 static function ($field): string {
@@ -116,7 +122,9 @@ class MarkerCrudController extends AbstractCrudController
             ->renderAsSwitch(false)
         ;
 
-        $name = TextField::new('name');
+        $name = TextField::new('name')
+            ->hideOnIndex()
+        ;
 
         $shortDescription = TextareaField::new('shortDescription')
             ->setLabel('Short description')
@@ -158,6 +166,7 @@ class MarkerCrudController extends AbstractCrudController
             $longitude,
             $status,
             $type,
+            $coordinates,
             $isActive,
             $isPaper,
             $isGlass,
