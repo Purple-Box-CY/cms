@@ -47,6 +47,21 @@ class Marker
         'Multibox'                   => self::TYPE_MULTIBOX,
     ];
 
+    public const string LOCATION_LIMASSOL  = 'limassol';
+    public const string LOCATION_NIKOSIA   = 'nikosia';
+    public const string LOCATION_PAFOS     = 'pafos';
+    public const string LOCATION_LARNAKA   = 'larnaka';
+    public const string LOCATION_AYIA_NAPA = 'ayia_napa';
+
+    public const array NAMES_LOCATIONS = [
+        'Limassol'   => self::LOCATION_LIMASSOL,
+        'Nikosia'    => self::LOCATION_NIKOSIA,
+        'Pafos'      => self::LOCATION_PAFOS,
+        'Larnaka'    => self::LOCATION_LARNAKA,
+        'Ayina Napa' => self::LOCATION_AYIA_NAPA,
+    ];
+
+
     public const STATUS_NEW             = 'new';
     public const STATUS_WAITING_APPROVE = 'waiting_approve';
     public const STATUS_ACTIVE          = 'active';
@@ -95,6 +110,8 @@ class Marker
     #[ORM\Column(type: Types::STRING, length: 64, nullable: true)]
     private ?string $type = null;
 
+    #[ORM\Column(type: Types::STRING, length: 64, nullable: true)]
+    private ?string $location = null;
     #[ORM\Column(type: Types::STRING, length: 32, nullable: false)]
     private string $latitude;
 
@@ -496,5 +513,17 @@ class Marker
     public function getCoordinates(): string
     {
         return sprintf('%s, %s', $this->latitude, $this->longitude);
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?string $location): Marker
+    {
+        $this->location = $location;
+
+        return $this;
     }
 }

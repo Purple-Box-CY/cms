@@ -88,6 +88,9 @@ class MarkerCrudController extends AbstractCrudController
         $type = ChoiceField::new('type')
             ->setChoices(Marker::NAMES_TYPES);
 
+        $location = ChoiceField::new('location')
+            ->setChoices(Marker::NAMES_LOCATIONS);
+
         $isActive = BooleanField::new('is_active')
             ->hideOnIndex()
             ->renderAsSwitch(false)
@@ -172,6 +175,7 @@ class MarkerCrudController extends AbstractCrudController
             $latitude,
             $longitude,
             $status,
+            $location,
             $type,
             $isActive,
             $isPaper,
@@ -226,9 +230,14 @@ class MarkerCrudController extends AbstractCrudController
         $statusFilter = ChoiceFilter::new('status')
             ->setChoices(array_combine(Marker::AVAILABLE_STATUSES, Marker::AVAILABLE_STATUSES));
 
+
+        $locationFilter = ChoiceFilter::new('location')
+            ->setChoices(Marker::NAMES_LOCATIONS);
+
         return $filters
             ->add($typeFilter)
             ->add($statusFilter)
+            ->add($locationFilter)
             ;
     }
 }
