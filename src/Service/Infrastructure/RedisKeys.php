@@ -20,6 +20,7 @@ class RedisKeys
     public const        KEY_CONFIG_LIST_ALL        = 'config:list:all';
     public const        KEY_ARTICLE_ITEM           = 'article:%s'; //alias
     public const string KEY_MARKERS                = 'markers:%s';
+    public const string KEY_MARKER                 = 'marker:%s';
     public const        QUEUE_MAIN                 = 'main';
     public const        QUEUE_CONVERT_VIDEO        = 'convert_video';
     public const        QUEUE_UPLOAD_CDN_VIDEO     = 'upload_cdn_video';

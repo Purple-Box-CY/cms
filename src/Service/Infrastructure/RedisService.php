@@ -296,6 +296,7 @@ class RedisService
     {
         $this->clear([
             sprintf(RedisKeys::KEY_MARKERS, '*'),
+            sprintf(RedisKeys::KEY_MARKER, $marker->getUidStr()),
         ]);
     }
 
