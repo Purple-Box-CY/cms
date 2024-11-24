@@ -3,6 +3,7 @@
 namespace App\Service\Infrastructure;
 
 use App\Entity\Article;
+use App\Entity\Marker;
 use App\Entity\User;
 use App\Service\Exception\RedisQueueNotFoundException;
 use App\Service\Utility\MomentHelper;
@@ -288,6 +289,13 @@ class RedisService
     {
         $this->clear([
             sprintf(RedisKeys::KEY_ARTICLE_ITEM, $article->getAlias()),
+        ]);
+    }
+
+    public function invalidateCacheMarker(Marker $marker): void
+    {
+        $this->clear([
+            sprintf(RedisKeys::KEY_MARKERS, '*'),
         ]);
     }
 
