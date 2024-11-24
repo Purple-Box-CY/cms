@@ -96,10 +96,10 @@ class Marker
     private ?string $type = null;
 
     #[ORM\Column(type: Types::STRING, length: 32, nullable: false)]
-    private float $latitude;
+    private string $latitude;
 
     #[ORM\Column(type: Types::STRING, length: 32, nullable: false)]
-    private float $longitude;
+    private string $longitude;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $shortDescription = null;
@@ -491,5 +491,10 @@ class Marker
         $this->longitude = $longitude;
 
         return $this;
+    }
+
+    public function getCoordinates(): string
+    {
+        return sprintf('%s, %s', $this->latitude, $this->longitude);
     }
 }
