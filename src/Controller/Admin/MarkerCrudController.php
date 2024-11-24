@@ -85,6 +85,7 @@ class MarkerCrudController extends AbstractCrudController
                 static function ($field): string {
                     return match ($field) {
                         Marker::STATUS_ACTIVE => 'success',
+                        Marker::STATUS_WAITING_APPROVE => 'primary',
                         Marker::STATUS_DELETED => 'danger',
                         Marker::STATUS_BLOCKED => 'danger',
                         default => 'light',
