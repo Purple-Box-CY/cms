@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\AdminUser;
 use App\Entity\Marker;
+use App\Service\AuthService;
+use App\Service\Utility\DomainHelper;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -20,6 +22,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[IsGranted(AdminUser::ROLE_ADMIN)]
@@ -185,9 +191,28 @@ class MarkerCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
+        $showPageButton = Action::new('showPageAction', 'Show on map', 'fa fa-map-marker')
+            ->setHtmlAttributes(['target' => '_blank'])
+            ->linkToRoute('marker_show_page',
+                function (Marker $object): array {
+                    return [
+                        'uid' => $object->getUidStr(),
+                    ];
+                })
+            ->displayIf(fn(Marker $object) => !$object->isDeleted());
+
         return $actions
+            ->add(Crud::PAGE_DETAIL, $showPageButton)
+            ->add(Crud::PAGE_INDEX, $showPageButton)
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->add(Crud::PAGE_EDIT, Action::SAVE_AND_ADD_ANOTHER);
+    }
+
+
+    #[Route('/marker/show-page', name: 'marker_show_page')]
+    public function showPageAction(string $uid, Request $request): RedirectResponse
+    {
+        return new RedirectResponse(DomainHelper::getWebProjectDomain().'/'.$uid);
     }
 
     public function configureFilters(Filters $filters): Filters
