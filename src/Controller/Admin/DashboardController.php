@@ -33,8 +33,9 @@ class DashboardController extends AbstractDashboardController
     {
         $routeBuilder = $this->container->get(AdminUrlGenerator::class);
         $links = [
-            'Users'      => $routeBuilder->setController(UserCrudController::class)->generateUrl(),
             'Articles'   => $routeBuilder->setController(ArticleCrudController::class)->generateUrl(),
+            'Markers'    => $routeBuilder->setController(MarkerCrudController::class)->generateUrl(),
+            'Users'      => $routeBuilder->setController(UserCrudController::class)->generateUrl(),
         ];
 
         $moderationLinks = [
@@ -164,15 +165,21 @@ class DashboardController extends AbstractDashboardController
             ->setPermission('ROLE_ADMIN');
 
         yield MenuItem::linkToUrl(
-            'Users',
-            'fas fa-users',
-            $this->generateControllerUrl(UserCrudController::class),
-        )->setPermission('ROLE_ADMIN');
-
-        yield MenuItem::linkToUrl(
             'Articles',
             'fas fa-newspaper',
             $this->generateControllerUrl(ArticleCrudController::class),
+        )->setPermission('ROLE_ADMIN');
+
+        yield MenuItem::linkToUrl(
+            'Markers',
+            'fa fa-map-marker',
+            $this->generateControllerUrl(MarkerCrudController::class),
+        )->setPermission('ROLE_ADMIN');
+
+        yield MenuItem::linkToUrl(
+            'Users',
+            'fas fa-users',
+            $this->generateControllerUrl(UserCrudController::class),
         )->setPermission('ROLE_ADMIN');
 
         yield MenuItem::linkToUrl(
