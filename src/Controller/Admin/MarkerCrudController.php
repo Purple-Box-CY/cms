@@ -4,17 +4,22 @@ namespace App\Controller\Admin;
 
 use App\Entity\AdminUser;
 use App\Entity\Marker;
+use App\Service\ImageService;
 use App\Service\Utility\DomainHelper;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Asset;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Option\TextAlign;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\HiddenField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -28,6 +33,9 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted(AdminUser::ROLE_ADMIN)]
 class MarkerCrudController extends AbstractCrudController
 {
+    public function __construct(
+        private ImageService $imageService,
+    ) {}
     public static function getEntityFqcn(): string
     {
         return Marker::class;
@@ -168,7 +176,26 @@ class MarkerCrudController extends AbstractCrudController
             ->hideOnIndex()
             ->hideOnForm();
 
+
+        $image = HiddenField::new('imageUrl')
+            ->setTemplateName('crud/field/image')
+            ->addCssClass('field-image')
+            ->addJsFiles(Asset::fromEasyAdminAssetPackage('field-image.js'), Asset::fromEasyAdminAssetPackage('field-file-upload.js'))
+            ->setDefaultColumns('col-md-7 col-xxl-5')
+            ->setTextAlign(TextAlign::CENTER)
+            //->setMaxLength(1024)
+            //->hideOnForm()
+        ;
+
+        $imageUpload = ImageField::new('image_file')
+            ->setUploadDir($this->imageService->getMarkersImageUploadDir())
+            ->setUploadedFileNamePattern('[randomhash].[extension]')
+            ->hideOnIndex()
+            ->hideOnDetail();
+
         return [
+            $image,
+            $imageUpload,
             $id,
             $ulid,
             $uid,
@@ -192,7 +219,7 @@ class MarkerCrudController extends AbstractCrudController
             //$updatedAt,
             $description,
             $descriptionHtml,
-            $imageUrl,
+            //$imageUrl,
         ];
     }
 

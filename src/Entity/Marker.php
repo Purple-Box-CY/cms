@@ -61,7 +61,6 @@ class Marker
         'Ayina Napa' => self::LOCATION_AYIA_NAPA,
     ];
 
-
     public const STATUS_NEW             = 'new';
     public const STATUS_WAITING_APPROVE = 'waiting_approve';
     public const STATUS_ACTIVE          = 'active';
@@ -126,6 +125,8 @@ class Marker
 
     #[ORM\Column(type: Types::STRING, length: 256, nullable: true)]
     private ?string $imageUrl = null;
+
+    private ?string $imageFile = null;
 
     #[ORM\Column]
     private bool $isActive = false;
@@ -525,5 +526,15 @@ class Marker
         $this->location = $location;
 
         return $this;
+    }
+
+    public function getImageFile(): ?string
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?string $imageFile): void
+    {
+        $this->imageFile = $imageFile;
     }
 }

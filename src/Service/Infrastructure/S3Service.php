@@ -47,32 +47,6 @@ class S3Service
             options: $options,
         );
 
-        if ($this->s3BackupBucket) {
-            $this->uploadFileToBackupCdn($file, $newFilePath, $options);
-        }
-
         return sprintf('%s/%s', $this->cdnDomain, $newFilePath);
-    }
-
-    public function uploadFileToBackupCdn(
-        File   $file,
-        string $newFilePath,
-        array  $options = [],
-    ) {
-        try {
-            $this->s3Client->upload(
-                bucket: $this->s3BackupBucket,
-                key: $newFilePath,
-                body: $file->getContent(),
-                options: $options,
-
-            );
-        } catch (\Exception $e) {
-            $this->logger->error('Failed to upload backup CDN file',
-                [
-                    'file_path' => $newFilePath,
-                    'error'     => $e->getMessage(),
-                ]);
-        }
     }
 }
