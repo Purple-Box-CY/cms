@@ -153,6 +153,11 @@ class MarkerCrudController extends AbstractCrudController
             ->hideOnForm()
             ->hideOnIndex();
 
+        $imageUrl = TextField::new('imageUrl')
+            ->hideOnIndex()
+            ->hideOnDetail()
+        ;
+
         $createdAt = DateTimeField::new('created_at')
             ->hideOnIndex()
             ->hideOnForm();
@@ -183,6 +188,7 @@ class MarkerCrudController extends AbstractCrudController
             //$updatedAt,
             $description,
             $descriptionHtml,
+            $imageUrl,
         ];
     }
 
